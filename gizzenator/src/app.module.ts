@@ -8,6 +8,9 @@ import { SubscriptionModule } from './subscription/subscription.module';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
     ConfigModule.forRoot({
       isGlobal: true
     }),
