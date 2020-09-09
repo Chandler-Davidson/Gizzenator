@@ -1,0 +1,29 @@
+version: "3"
+
+volumes:
+  static_site:
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DATABASE: "songs"
+    ports:
+      - "5432:5432"
+
+  gizzenator:
+    build: ./gizzenator
+    depends_on:
+      - db
+    ports: 
+      - "4000:3000"
+    volumes:
+      - static_site:/app/public:ro
+
+  website:
+    build: ./signup
+    volumes:
+      - static_site:/app/build:rw
