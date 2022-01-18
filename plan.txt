@@ -1,0 +1,34 @@
+MVP: Discord bot that provides gizz lyrics
+
+- lyrics-service
+  - app
+    - main api
+    - creates jobs in rabbitMQ queue
+    - inserts artist/songs into posgres
+    - fetch lyrics
+  - lyrics-runner
+    - recieves jobs from queue
+    - fetches lyrics from genius (using library)
+    - stores lyrics in sections
+    - could move to multithreadeds
+
+- discord-bot
+  - discord integration (bot)
+  - registers slash commands for app
+
+- logger
+  - default logger for services
+
+- genius-library
+  - provides access to Genius API/lyrics
+
+Todo:
+  - figure out queue access from VM
+  - project-wide
+    - add easier config setup
+  - lyrics-service
+    - API should be able to refresh most popular songs
+    - API security
+  - discord-bot
+    - integration into lyrics-service API
+    - add songs from discord

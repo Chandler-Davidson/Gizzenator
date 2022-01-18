@@ -1,29 +1,43 @@
-version: "3"
+version: "3.2"
 
 volumes:
-  static_site:
+    db_data:
 
 services:
-  db:
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5673:5672
+        - 15673:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - rabbitmq_nodejs
+
+  postgres:
     image: postgres
+    hostname: postgres
+    container_name: postgres
     restart: always
     environment:
-      POSTGRES_USER: "admin"
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_DATABASE: "songs"
+        POSTGRES_DB: app_db
+        POSTGRES_USER: app_user
+        POSTGRES_PASSWORD: secretpassword
+    volumes:
+      - db_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - 5432:5432
 
-  gizzenator:
-    build: ./gizzenator
-    depends_on:
-      - db
-    ports: 
-      - "4000:3000"
-    volumes:
-      - static_site:/app/public:ro
+  adminer:
+    image: adminer
+    hostname: adminer
+    container_name: adminer
+    restart: always
+    ports:
+        - 8080:8080
 
-  website:
-    build: ./signup
-    volumes:
-      - static_site:/app/build:rw
+networks:
+  rabbitmq_nodejs:
+    driver: bridge
