@@ -23,12 +23,8 @@ MVP: Discord bot that provides gizz lyrics
   - provides access to Genius API/lyrics
 
 Todo:
-  - figure out queue access from VM
-  - project-wide
-    - add easier config setup
   - lyrics-service
+    - Should I increase API security? Users?
     - API should be able to refresh most popular songs
-    - API security
   - discord-bot
-    - integration into lyrics-service API
-    - add songs from discord
+    - schedule reocurring lyrics
