@@ -20,7 +20,7 @@ async function main() {
     registerRoutes(app, producer, logger);
     const port = 3000;
     await producer.connect();
-    await app.listen(port);
+    await app.listen(port, '0.0.0.0');
     logger.info(`Ready and listening on port: ${port}`);
   } catch (err) {
     logger.error(err);
