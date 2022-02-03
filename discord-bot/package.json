@@ -17,8 +17,7 @@
     "lyrics-runner": "file:../lyrics-runner"
   },
   "scripts": {
-    "start-bot": "node ./src/index.js",
-    "deploy-commands": "node ./scripts/deploy-commands.js"
+    "start-bot": "node ./src/index.js"
   },
   "type": "module"
 }

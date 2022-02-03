@@ -1,6 +1,7 @@
 import config from "config";
 import { Client, Intents } from "discord.js";
-import { commands } from "./commands.js";
+import { commands } from "./commands/commands.js";
+import { registerCommands } from "./commands/registerCommands.js";
 
 const client = new Client({
   intents: [
@@ -9,6 +10,8 @@ const client = new Client({
     Intents.FLAGS.DIRECT_MESSAGES,
   ],
 });
+
+client.on('guildCreate', ({ id }) => registerCommands(id));
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) {
