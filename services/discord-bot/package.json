@@ -13,8 +13,7 @@
     "config": "^3.3.7",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
-    "logger": "file:../logger",
-    "lyrics-runner": "file:../lyrics-runner"
+    "logger": "file:../../lib/logger"
   },
   "scripts": {
     "start-bot": "node ./src/index.js"

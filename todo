@@ -1,0 +1,30 @@
+Reoccurring Lyrics
+
+Discord bot
+  - new commands:
+    - enable/disable reocurring messages
+    - set cron time
+
+Storage
+  - new tables:
+    - discordChannel
+    - cronJob (describes the time to activate)
+      - 1:M CronJob -> Channel
+
+Service
+  - probably need a new service for managing cronjobs
+  - needs to be persisted and in memory
+
+
+
+# Big Idea!
+
+Timing Service
+  - api
+    - endpoint to create new timing
+    - endpoint to create webhook (optional since internal)
+  - acts like an in memory cache w/ persistance
+    - on startup, load all timings into memory
+  - when a job fires, send it to the caller (likely only discord bot)
+  
+- should I use webhooks or create jobs in rabbitmq?
