@@ -1,18 +1,16 @@
 import amqp from "amqplib";
-import { chunk } from "../../lib/util.js";
-
-const queueName = "lyrics.parse_sections";
 
 export class QueuePublisher {
-  constructor({ url }) {
+  constructor({ url }, queueName) {
     this.url = url;
+    this.queueName = queueName
   }
 
   async connect() {
     this.connection = await amqp.connect(this.url, "heartbeat=60");
     this.channel = await this.connection.createChannel();
     try {
-      await this.channel.assertQueue(queueName, { durable: true });
+      await this.channel.assertQueue(this.queueName, { durable: true });
     } catch (err) {
       console.error("Error connecting to queue", err);
     }
@@ -23,13 +21,8 @@ export class QueuePublisher {
     await this.connection.close();
   }
 
-  createJobs(artist) {
-    return chunk(artist.songs, 3).map(titles =>
-      this.channel.sendToQueue(queueName,
-        encode({
-          artist: artist.name,
-          songs: titles
-        })));
+  createJob(job) {
+    return this.channel.sendToQueue(this.queueName, encode(job));
   }
 }
 

@@ -18,6 +18,7 @@ Todo List
   [X] Store timings
   [X] In memory cache of timings
   [X] Create cron jobs to spawn messages
+  [ ] Refresh cache on process restart
   [ ] Edit: Should probably merge the API into the lyrics-service one
             Idk what to name it, kinda combines two concerns I guess
             This would let me use the same db connection/schema

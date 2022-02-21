@@ -15,9 +15,11 @@
     "@prisma/client": "^3.8.1",
     "amqplib": "^0.8.0",
     "config": "^3.3.7",
+    "cron": "^1.8.2",
     "fastify": "^3.27.0",
     "genius": "file:../../lib/genius-library",
-    "logger": "file:../../lib/logger"
+    "logger": "file:../../lib/logger",
+    "node-cron": "^3.0.0"
   },
   "type": "module",
   "devDependencies": {

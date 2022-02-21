@@ -1,9 +1,11 @@
 import cron from 'cron';
 import config from 'config';
 import { QueuePublisher } from './queuePublisher.js';
+import { findRandomSection } from "../routes/lyrics/fetchSection.js";
 
 export const jobCache = {};
-const queuePublisher = new QueuePublisher(config.get("RabbitMQ"));
+const queuePublisher = new QueuePublisher(config.get("RabbitMQ"), 'lyrics.scheduled_send');
+
 // Needs to be in classish thing
 queuePublisher.connect();
 
@@ -32,9 +34,9 @@ export function removeJob(expression, guildId) {
 }
 
 function scheduleJob(expression) {
-  const job = new cron.CronJob('* * * * * *', () => {
+  const job = new cron.CronJob(expression, async () => {
     const { ids } = jobCache[expression];
-    queuePublisher.createJob(ids)
+    queuePublisher.createJob({ ids, lyrics: await findRandomSection() })
   });
 
   job.start();

@@ -1,16 +1,20 @@
 import config from "config";
+import { prisma } from '../../lib/prisma.js';
 import { Genius } from "genius";
-import PrismaClient from "@prisma/client";
-const genius = new Genius(config.get("Genius"));
-const prisma = new PrismaClient.PrismaClient();
+import { chunk } from "../../lib/util.js";
+import { QueuePublisher } from "../../lib/queuePublisher.js";
 
-export async function createJob(producer, logger, request, response) {
+const genius = new Genius(config.get("Genius"));
+const producer = new QueuePublisher(config.get("RabbitMQ"), 'lyrics.parse_sections');
+producer.connect();
+
+export async function createRefreshJob(request, response) {
   const { artist: artistName } = request.body;
 
   let artist = await fetchArtist(artistName);
 
   if (artist) {
-    logger.warn(`Artist already exists: ${artistName}`);
+    console.warn(`Artist already exists: ${artistName}`);
     response.code(400).send({ message: "Artist already exists" });
     return;
   }
@@ -18,9 +22,11 @@ export async function createJob(producer, logger, request, response) {
   const songs = await genius.topSongs(artistName);
   artist = await createArtist(artistName, songs);
 
-  const jobs = producer.createJobs(artist);
+  const jobs = chunk(artist.songs, 3).map(titles =>
+    producer.createJob({artist: artist.name, songs: titles}));
+
   response.code(jobs.every(j => j) ? 200 : 500).send();
-  logger.info(`Creating ${jobs.length} new jobs`);
+  console.info(`Creating ${jobs.length} new jobs`);
 }
 
 function fetchArtist(name) {

@@ -31,3 +31,16 @@ model Section {
   song   Song   @relation(fields: [songId], references: [id])
   songId Int
 }
+
+model Channel {
+  id Int @id @default(autoincrement())
+  discordChannelId Int @unique
+  schedule Schedule @relation(fields: [scheduleId], references: [id])
+  scheduleId Int
+}
+
+model Schedule {
+  id Int @id @default(autoincrement())
+  expression String @unique
+  channels Channel[]
+}

@@ -1,14 +1,13 @@
-import PrismaClient from "@prisma/client";
-const prisma = new PrismaClient.PrismaClient();
+import { prisma } from '../../lib/prisma.js';
 
-export async function section(req, resp) {
-  const sectionsCount = await prisma.section.count();
-  const skip = Math.floor(Math.random() * sectionsCount);
-  const section = await findRandomSection(skip);
-  resp.send(section);
+export async function fetchSection(req, resp) {
+  resp.send(await findRandomSection());
 }
 
-function findRandomSection(skip) {
+export async function findRandomSection() {
+  const sectionsCount = await prisma.section.count();
+  const skip = Math.floor(Math.random() * sectionsCount);
+
   return prisma.section.findFirst({
     take: 1, skip: skip,
     include: {
