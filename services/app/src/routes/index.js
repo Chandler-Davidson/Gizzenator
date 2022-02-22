@@ -8,5 +8,5 @@ export function registerRoutes(app) {
   app.get("/lyrics", (req, resp) => fetchSection(req, resp));
 
   app.put('/schedules', (req, resp) => updateSchedule(req, resp));
-  app.delete('/schedules/:guildId', (req, resp) => deleteSchedule(req, resp));
+  app.delete('/schedules/:channelId', (req, resp) => deleteSchedule(req, resp));
 }

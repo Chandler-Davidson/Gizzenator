@@ -1,4 +1,4 @@
-import { prisma } from '../../lib/prisma.js';
+import { prisma } from 'database';
 
 export async function fetchSection(req, resp) {
   resp.send(await findRandomSection());

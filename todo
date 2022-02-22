@@ -27,6 +27,10 @@ Todo List
             Multithread?
 [X] Setup Storage
 [X] Enqueue messages
-[ ] Dequeue messages in discord bot
-[ ] Figure out command format
+[X] Dequeue messages in discord bot
+[X] Figure out command format
     - I know I can pass options, but how do I do cron syntax cleanly?
+[ ] Better logging
+    - Can winston determine process name?
+[ ] Metrics
+    - Open source version of data dog?

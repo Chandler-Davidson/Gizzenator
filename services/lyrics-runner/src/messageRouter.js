@@ -1,8 +1,7 @@
 import config from "config";
 import { Genius } from "genius";
-import PrismaClient from "@prisma/client";
+import { prisma } from "database";
 
-const prisma = new PrismaClient.PrismaClient();
 const genius = new Genius(config.get("Genius"));
 
 async function fetchLyrics(artist, titles) {
@@ -13,7 +12,7 @@ async function fetchLyrics(artist, titles) {
 
 export async function messageRouter(msg, logger) {
   try {
-    const { artist: artistName, songs } = JSON.parse(msg.content);
+    const { artist: artistName, songs } = msg;
     const songIdLookup = Object.fromEntries(songs.map(({ title, id }) => [title, id]));
     const lyrics = (await fetchLyrics(artistName, songs.map(({ title }) => title))).filter(l => l);
 

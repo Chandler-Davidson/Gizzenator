@@ -4,25 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "app": "node ./app/src/index.js",
-    "lyrics-runner": "node ./lyrics-runner/src/index.js",
-    "migration": "npx prisma migrate dev"
+    "app": "node ./src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^3.8.1",
-    "amqplib": "^0.8.0",
     "config": "^3.3.7",
     "cron": "^1.8.2",
     "fastify": "^3.27.0",
-    "genius": "file:../../lib/genius-library",
+    "genius": "file:../../lib/genius",
     "logger": "file:../../lib/logger",
-    "node-cron": "^3.0.0"
+    "node-cron": "^3.0.0",
+    "queue": "file:../../lib/queue",
+    "database": "file:../../lib/database"
   },
   "type": "module",
   "devDependencies": {
-    "prisma": "^3.8.1"
+    "eslint": "^8.9.0"    
   }
 }

@@ -1,11 +1,11 @@
 import config from "config";
-import { prisma } from '../../lib/prisma.js';
+import { prisma } from 'database'
 import { Genius } from "genius";
 import { chunk } from "../../lib/util.js";
-import { QueuePublisher } from "../../lib/queuePublisher.js";
+import { QueueProducer } from "queue";
 
 const genius = new Genius(config.get("Genius"));
-const producer = new QueuePublisher(config.get("RabbitMQ"), 'lyrics.parse_sections');
+const producer = new QueueProducer(config.get("RabbitMQ"), 'lyrics.parse_sections');
 producer.connect();
 
 export async function createRefreshJob(request, response) {

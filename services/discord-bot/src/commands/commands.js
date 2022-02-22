@@ -35,6 +35,7 @@ export const commandHandlers = {
       const cronExpression = interaction.options.getString('schedule');
       const channelId = interaction.channelId;
       const response = await axios.put('http://localhost:3000/schedules', { cronExpression, channelId })
+      interaction.reply('Aight, I got you later');
       console.log(response);
     } catch (err) {
       console.error(err);
@@ -42,8 +43,9 @@ export const commandHandlers = {
   },
   'gizzbreak': async interaction => {
     try {
-      const guildId = interaction.guildId;
-      const response = await axios.delete(`http://localhost:3000/schedules/${guildId}`);
+      const channelId = interaction.channelId;
+      const response = await axios.delete(`http://localhost:3000/schedules/${channelId}`);
+      interaction.reply('No sweat, come back later');
     } catch (err) {
       console.log(err);
     }

@@ -13,7 +13,8 @@
     "config": "^3.3.7",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
-    "logger": "file:../../lib/logger"
+    "logger": "file:../../lib/logger",
+    "queue": "file:../../lib/queue"
   },
   "scripts": {
     "start-bot": "node ./src/index.js"

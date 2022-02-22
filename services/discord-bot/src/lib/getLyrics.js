@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export async function getLyricMessage() {
   const { text, song } = (await axios.get('http://localhost:3000/lyrics')).data;
   return formatResponse(text, song, song.artist);

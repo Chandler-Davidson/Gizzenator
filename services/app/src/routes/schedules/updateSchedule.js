@@ -1,4 +1,4 @@
-import { prisma } from '../../lib/prisma.js';
+import { prisma } from 'database';
 import { addJob } from '../../lib/scheduling.js'
 
 export async function updateSchedule(req, resp) {
@@ -61,33 +61,3 @@ async function persistSchedule(cronExpression, channelId) {
       }
     });
 }
-
-// function persistSchedule(cronExpression, channelId) {
-//   return prisma.schedule.upsert({
-//     where: {
-//       expression: cronExpression,
-//     },
-//     update: {
-//       guilds: {
-//         connectOrCreate: [
-//           {
-//             create: { discordchannelId: channelId },
-//             where: { discordchannelId: channelId },
-//           }
-//         ]
-//       }
-//     },
-//     create: {
-//       expression: cronExpression,
-//       guilds: {
-//         connectOrCreate: [
-//           {
-//             create: { discordchannelId: channelId },
-//             where: { discordchannelId: channelId },
-//           }
-//         ]
-//       }
-//     }
-//   });
-// }
-

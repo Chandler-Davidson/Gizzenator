@@ -1,10 +1,10 @@
 import config from "config";
 import { Client, Intents } from "discord.js";
 import { commandHandlers } from "./commands/commands.js";
-import { QueueConsumer } from "./queueConsumer.js";
 import { formatResponse } from "./lib/getLyrics.js";
+import { QueueConsumer } from "queue";
 
-const queueConsumer = new QueueConsumer(config.get("RabbitMQ"));
+const queueConsumer = new QueueConsumer(config.get("RabbitMQ"), "lyrics.scheduled_send");
 const client = new Client({
   intents: [
     Intents.FLAGS.GUILDS,
@@ -33,7 +33,7 @@ client.on("interactionCreate", async (interaction) => {
 
 async function handleMessage(message) {
   try {
-    const { ids, lyrics } = JSON.parse(message.content);
+    const { ids, lyrics } = message;
     const channels = ids.map(id => client.channels.cache.get(id)).filter(c => c);
 
     for (const channel of channels) {
