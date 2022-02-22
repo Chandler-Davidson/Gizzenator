@@ -1,25 +1,13 @@
-Reoccurring Lyrics
+Todo
 
-# Big Idea!
-
-Timing Service
-  - api
-    - endpoint to create new timing
-    - endpoint to create webhook (optional since internal)
-  - acts like an in memory cache w/ persistance
-    - on startup, load all timings into memory
-  - when a job fires, send it to the caller (likely only discord bot)
-  
-- should I use webhooks or create jobs in rabbitmq?
-
-
-Todo List
 [X] Build new service
   [X] Store timings
   [X] In memory cache of timings
   [X] Create cron jobs to spawn messages
   [ ] Refresh cache on process restart
-  [ ] Edit: Should probably merge the API into the lyrics-service one
+      - Why didn't I do this earlier?
+      - Maybe refactor into better abstraction, just in memory cache
+  [X] Edit: Should probably merge the API into the lyrics-service one
             Idk what to name it, kinda combines two concerns I guess
             This would let me use the same db connection/schema
             Maybe consider using nest to have a rock solid API layer
@@ -30,6 +18,11 @@ Todo List
 [X] Dequeue messages in discord bot
 [X] Figure out command format
     - I know I can pass options, but how do I do cron syntax cleanly?
+[X] Better internal deps: packages?
+    - Should internals be packages? Pain to `npm i` every repo, probably wrong
+[X] Better split services: app, discord, lyrics-runner
+[ ] Robustness
+    - Discord bot needs help protecting itself
 [ ] Better logging
     - Can winston determine process name?
 [ ] Metrics
