@@ -34,7 +34,7 @@ model Section {
 
 model Channel {
   id Int @id @default(autoincrement())
-  discordChannelId Int @unique
+  discordChannelId String @unique
   schedule Schedule @relation(fields: [scheduleId], references: [id])
   scheduleId Int
 }

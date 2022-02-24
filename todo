@@ -30,3 +30,8 @@ Todo
 * [ ] Metrics
     - Open source version of data dog?
     - May be more work than value, get some sense of scale
+
+
+[ ] - Load schedules from memory
+[ ] - Discord cron input
+[ ] - Buffer random lyrics

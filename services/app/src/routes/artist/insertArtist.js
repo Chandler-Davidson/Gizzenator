@@ -8,7 +8,7 @@ const genius = new Genius(config.get("Genius"));
 const producer = new QueueProducer(config.get("RabbitMQ"), 'lyrics.parse_sections');
 producer.connect();
 
-export async function createRefreshJob(request, response) {
+export async function insertArtist(request, response) {
   const { artist: artistName } = request.body;
 
   let artist = await fetchArtist(artistName);
