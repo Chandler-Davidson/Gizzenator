@@ -1,8 +1,6 @@
-import { insertArtist } from "./artist/insertArtist.js";
-import { fetchSection } from "./lyrics/fetchSection.js";
+import { insertArtist } from "./artist.js";
+import { fetchSection } from "./lyrics.js";
 import { updateSchedule, deleteSchedule } from "./schedules.js";
-// import { updateSchedule } from "./schedules/updateSchedule.js";
-// import { deleteSchedule } from "./schedules/deleteSchedule.js";
 
 export function registerRoutes(app) {
   app.get("/lyrics", (req, resp) => fetchSection(req, resp));

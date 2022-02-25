@@ -3,7 +3,7 @@ import { prisma } from 'database';
 import config from "config";
 
 import { QueueProducer } from 'queue';
-import { findRandomSection } from '../routes/lyrics/fetchSection.js';
+import { findRandomSection } from '../routes/lyrics.js';
 
 const queueProducer = new QueueProducer(config.get("RabbitMQ"), 'lyrics.scheduled_send');
 queueProducer.connect();

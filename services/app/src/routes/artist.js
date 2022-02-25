@@ -1,7 +1,7 @@
 import config from "config";
 import { prisma } from 'database'
 import { Genius } from "genius";
-import { chunk } from "../../lib/util.js";
+import { chunk } from "../lib/util.js";
 import { QueueProducer } from "queue";
 
 const genius = new Genius(config.get("Genius"));
