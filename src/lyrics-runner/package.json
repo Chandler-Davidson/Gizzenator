@@ -12,9 +12,9 @@
   "type": "module",
   "dependencies": {
     "config": "^3.3.7",
-    "logger": "file:../../lib/logger",
-    "queue": "file:../../lib/queue",
-    "database": "file:../../lib/database",
-    "genius": "file:../../lib/genius"
+    "logger": "file:../lib/logger",
+    "queue": "file:../lib/queue",
+    "database": "file:../lib/database",
+    "genius": "file:../lib/genius"
   }
 }

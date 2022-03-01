@@ -12,7 +12,7 @@ export const commands = [
     options: [{
       name: 'schedule',
       type: 'STRING',
-      description: 'When should I send lyrics? Accepts a generic timeframe or a cron schedule.',
+      description: 'When should I send lyrics? Accepts a generic cron schedule.',
       required: true
     }]
   },
@@ -35,9 +35,14 @@ export const commandHandlers = {
       const cronExpression = interaction.options.getString('schedule');
       const channelId = interaction.channelId;
       const response = await axios.put('http://localhost:3000/schedules', { cronExpression, channelId })
+
       interaction.reply('Aight, I got you later');
-      console.log(response);
     } catch (err) {
+      if (err.response.status === 400) {
+        interaction.reply("That schedule doesn't seem right...");
+        return;
+      }
+
       console.error(err);
     }
   },

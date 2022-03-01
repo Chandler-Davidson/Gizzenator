@@ -23,8 +23,8 @@ export class QueueConsumer {
     try {
       await this.channel.assertQueue(this.queueName, { durable: true });
       await this.channel.consume(this.queueName, async (msg) => {
-        console.log('Processing message');
-        const success = await callback(JSON.parse(msg.content));
+        const message = JSON.parse(msg.content);
+        const success = await callback(message);
 
         if (success)
           this.channel.ack(msg);

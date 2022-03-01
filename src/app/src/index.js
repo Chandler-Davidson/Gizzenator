@@ -7,7 +7,6 @@ const app = fastify({ logger: true });
 
 process.on("SIGTERM", async () => {
   logger.info('Closing...');
-  await producer.closeConnection();
   await app.close();
   process.exit(0);
 });

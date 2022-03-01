@@ -1,26 +1,40 @@
-import cron, { job } from 'cron';
+import cron from 'cron';
 import { prisma } from 'database';
 import config from "config";
 
 import { QueueProducer } from 'queue';
 import { findRandomSection } from '../routes/lyrics.js';
 
-const queueProducer = new QueueProducer(config.get("RabbitMQ"), 'lyrics.scheduled_send');
-queueProducer.connect();
-
 export class SchedulingRepository {
+  constructor() {
+    this.queueProducer = new QueueProducer(config.get("RabbitMQ"), 'lyrics.scheduled_send');
+  }
+
   async init() {
+    this.queueProducer.connect();
     const schedules = await prisma.schedule.findMany({ distinct: ['expression'] });
-    const entries = schedules.map(({expression}) => [expression, createJob(expression)]);
+    const entries = schedules.map(({expression}) => [expression, this.createJob(expression)]);
     this.jobCache = new Map(entries);
+    console.log('queue connected');
   }
 
   async set(expression, channelId) {
     await upsertChannel(expression, channelId);
 
     if (!this.jobCache.has(expression)) {
-      this.jobCache.set(expression, createJob(expression));
+      this.jobCache.set(expression, this.createJob(expression));
     }
+  }
+
+  createJob(expression) {
+    const job = new cron.CronJob(expression, async () => {
+      const channels = await findChannels(expression);
+      const ids = channels.map(c => c.discordChannelId);
+      this.queueProducer.createJob({ ids, lyrics: await findRandomSection() });
+    });
+  
+    job.start();
+    return job;
   }
 
   remove(channelId) {
@@ -30,16 +44,7 @@ export class SchedulingRepository {
   }
 }
 
-function createJob(expression) {
-  const job = new cron.CronJob(expression, async () => {
-    const channels = await findChannels(expression);
-    const ids = channels.map(c => c.discordChannelId);
-    queueProducer.createJob({ ids, lyrics: await findRandomSection() });
-  });
 
-  job.start();
-  return job;
-}
 
 function upsertChannel(expression, channelId) {
   return prisma.channel.upsert({

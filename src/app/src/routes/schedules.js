@@ -8,8 +8,10 @@ export async function updateSchedule(req, resp) {
   // Todo: Clean cron before using
   const { cronExpression, channelId } = req.body;
 
-  if (!isValidCron(cronExpression))
+  if (!isValidCron(cronExpression)) {
     resp.code(400).send({ message: "Invalid cron expression." });
+    return;
+  }
 
   await schedulingRepo.set(cronExpression, channelId);
 
