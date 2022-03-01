@@ -6,7 +6,7 @@ Todo
     [X] Store timings
     [X] In memory cache of timings
     [X] Create cron jobs to spawn messages
-   *[ ] Refresh cache on process restart
+   [X] Refresh cache on process restart
         - Why didn't I do this earlier?
         - Maybe refactor into better abstraction, just in memory cache
     [X] Edit: Should probably merge the API into the lyrics-service one
@@ -23,15 +23,14 @@ Todo
   [X] Better internal deps: packages?
       - Should internals be packages? Pain to `npm i` every repo, probably wrong
   [X] Better split services: app, discord, lyrics-runner
-* [ ] Robustness
+  [X] Robustness
     - Discord bot needs help protecting itself
-* [ ] Better logging
+  [ ] Better logging
     - Can winston determine process name?
-* [ ] Metrics
+  [ ] Metrics
     - Open source version of data dog?
     - May be more work than value, get some sense of scale
-
-
-[ ] - Load schedules from memory
-[ ] - Discord cron input
-[ ] - Buffer random lyrics
+  [X] - Load schedules from memory
+  [X] - Discord cron input
+  [X] - Buffer random lyrics
+  [ ] - Build bot website

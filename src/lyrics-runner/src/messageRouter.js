@@ -25,7 +25,6 @@ export async function messageRouter(msg, logger) {
     });
 
   } catch (err) {
-    logger.error(err);
     return false;
   }
 
