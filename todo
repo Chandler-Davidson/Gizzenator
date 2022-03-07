@@ -34,3 +34,12 @@ Todo
   [X] - Discord cron input
   [X] - Buffer random lyrics
   [ ] - Build bot website
+
+Containers - How to build dumb stuff faster
+[ ] - Single container
+  [ ] - Docker file
+  [X] - Supervisor? pm2
+        - Can this be a generic unix program?
+  [ ] - Deploy to paas
+[ ] - Move to managed db
+  [ ] - Can I move queue to same solution?

@@ -1,0 +1,24 @@
+{
+  "name": "gizzenator",
+  "version": "1.0.0",
+  "description": "A Discord bot that serves King Gizzard & the Lizard Wizard lyrics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chandler-Davidson/Gizzenator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chandler-Davidson/Gizzenator/issues"
+  },
+  "homepage": "https://github.com/Chandler-Davidson/Gizzenator#readme",
+  "dependencies": {
+    "discord-bot": "file:src/discord-bot",
+    "lyrics": "file:src/app"
+  }
+}
