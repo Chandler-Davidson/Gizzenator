@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "app",
-      "script": ".app/src/index.js"
+      "script": "./app/src/index.js"
     },
     {
       "name": "discord-bot",

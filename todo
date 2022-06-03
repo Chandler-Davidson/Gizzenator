@@ -27,19 +27,20 @@ Todo
     - Discord bot needs help protecting itself
   [ ] Better logging
     - Can winston determine process name?
-  [ ] Metrics
+  [X] Metrics
     - Open source version of data dog?
     - May be more work than value, get some sense of scale
   [X] - Load schedules from memory
   [X] - Discord cron input
   [X] - Buffer random lyrics
-  [ ] - Build bot website
+  [ ] - ~Build bot website~
+  [ ] - Build better readme
 
 Containers - How to build dumb stuff faster
-[ ] - Single container
-  [ ] - Docker file
+[X] - Single container
+  [X] - Docker file
   [X] - Supervisor? pm2
         - Can this be a generic unix program?
   [ ] - Deploy to paas
-[ ] - Move to managed db
+[X] - Move to managed db
   [ ] - Can I move queue to same solution?

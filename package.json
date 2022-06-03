@@ -16,9 +16,5 @@
   "bugs": {
     "url": "https://github.com/Chandler-Davidson/Gizzenator/issues"
   },
-  "homepage": "https://github.com/Chandler-Davidson/Gizzenator#readme",
-  "dependencies": {
-    "discord-bot": "file:src/discord-bot",
-    "lyrics": "file:src/app"
-  }
+  "homepage": "https://github.com/Chandler-Davidson/Gizzenator#readme"
 }
