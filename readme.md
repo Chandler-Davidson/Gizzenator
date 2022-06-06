@@ -29,20 +29,6 @@ _TLDR_: Prefetch top songs, batch them into jobs. Fetch lyrics for each song, pa
 - genius-library
   - provides access to Genius API/lyrics
 
-## Roadmap
-  - better config/secret management
-    - test environment
-  - lyrics-service
-    - should I increase API security? Users?
-    - api should be able to refresh most popular songs
-    - prefetch buffer of lyrics, reduce IO from storage
-  - discord-bot
-    - schedule reocurring lyrics
-      - think about channel ID storage
-  - website
-    - description
-    - link to add app/bot to server
-
 ## Support Development
 
 - Log a ticket

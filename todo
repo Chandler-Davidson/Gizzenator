@@ -2,45 +2,4 @@ Todo
 
 * - Priority
   
-  [X] Build new service
-    [X] Store timings
-    [X] In memory cache of timings
-    [X] Create cron jobs to spawn messages
-   [X] Refresh cache on process restart
-        - Why didn't I do this earlier?
-        - Maybe refactor into better abstraction, just in memory cache
-    [X] Edit: Should probably merge the API into the lyrics-service one
-              Idk what to name it, kinda combines two concerns I guess
-              This would let me use the same db connection/schema
-              Maybe consider using nest to have a rock solid API layer
-              But that would also mean all cron jobs are running in same thread
-              Multithread?
-  [X] Setup Storage
-  [X] Enqueue messages
-  [X] Dequeue messages in discord bot
-  [X] Figure out command format
-      - I know I can pass options, but how do I do cron syntax cleanly?
-  [X] Better internal deps: packages?
-      - Should internals be packages? Pain to `npm i` every repo, probably wrong
-  [X] Better split services: app, discord, lyrics-runner
-  [X] Robustness
-    - Discord bot needs help protecting itself
-  [ ] Better logging
-    - Can winston determine process name?
-  [X] Metrics
-    - Open source version of data dog?
-    - May be more work than value, get some sense of scale
-  [X] - Load schedules from memory
-  [X] - Discord cron input
-  [X] - Buffer random lyrics
-  [ ] - ~Build bot website~
-  [ ] - Build better readme
-
-Containers - How to build dumb stuff faster
-[X] - Single container
-  [X] - Docker file
-  [X] - Supervisor? pm2
-        - Can this be a generic unix program?
-  [ ] - Deploy to paas
-[X] - Move to managed db
-  [ ] - Can I move queue to same solution?
+[ ] - Twitter integration
