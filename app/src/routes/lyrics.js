@@ -6,9 +6,9 @@ export async function fetchSection(req, resp) {
   resp.send(await findRandomSection(kglw));
 }
 
-export async function findRandomSection(artist) {
+export async function findRandomSection(artist = kglw) {
   const { title, sections } = await findRandomSong(artist);
-  const sectionIndex = randomInteger(0, sections.length);
+  const sectionIndex = randomInteger(0, sections.length - 1);
 
   return {
     title,

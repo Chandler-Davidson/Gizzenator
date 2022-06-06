@@ -38,7 +38,7 @@ async function handleMessage(message) {
     const channels = ids.map(id => client.channels.cache.get(id)).filter(c => c);
 
     for (const channel of channels) {
-      channel.send(formatResponse(lyrics.text, lyrics.song, lyrics.song.artist))
+      channel.send(formatResponse(lyrics.text, lyrics.title, lyrics.artist))
     }
   } catch (err) {
     console.log(err);

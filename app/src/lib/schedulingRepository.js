@@ -35,6 +35,11 @@ export class SchedulingRepository {
   }
 
   createJob(expression) {
+    if (this.scheduledJobs.has(expression)) {
+      // Job already exists, skip
+      return;
+    }
+
     const job = new cron.CronJob(expression, async () => {
       const doc = await this.scheduleRef.doc(expression).get();
 
@@ -46,10 +51,7 @@ export class SchedulingRepository {
     });
 
     job.start();
-
-    if (!this.scheduledJobs.has(expression)) {
-      this.scheduledJobs.set(expression, job);
-    }
+    this.scheduledJobs.set(expression, job);
   }
 
   async remove(channelId) {

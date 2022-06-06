@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 export async function getLyricMessage() {
-  const { text, song } = (await axios.get('http://localhost:3000/lyrics')).data;
-  return formatResponse(text, song, song.artist);
+  const {data} = (await axios.get('http://localhost:3000/lyrics'));
+  const { text, title, artist } = data;
+  return formatResponse(text, title, artist);
 }
 
-export function formatResponse(text, song, artist) {
-  return `${text}\n\n${song.title} by ${artist.name}`;
+export function formatResponse(text, title, artist) {
+  return `${text}\n\n${title} by ${artist}`;
 }
