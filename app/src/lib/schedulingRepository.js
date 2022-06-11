@@ -19,6 +19,23 @@ export class SchedulingRepository {
 
     const schedules = (await this.scheduleRef.get()).docs;
     schedules.map(({ id: expression }) => this.createJob(expression));
+
+    this.scheduleRef.onSnapshot(snapshot => {
+      for (const change of snapshot.docChanges()) {
+        const { id: expression } = change.doc;
+
+        switch (change.type) {
+          case 'added':
+            this.createJob(expression);
+            break;
+          case 'removed': 
+            this.scheduledJobs.delete(expression);
+        
+          default:
+            break;
+        }
+      }
+    });
   }
 
   async set(expression, channelId) {
