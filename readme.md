@@ -6,6 +6,13 @@
 
 - **Why** - _Eh, why not?_
 
+- ** I want to be gizzified ** - [Add it to your Discord channel](https://discord.com/api/oauth2/authorize?client_id=930575134744543292&permissions=2147485696&scope=bot%20applications.commands), please be kind. 
+
+## Commands
+
+- `gizzify`: replies with random lyrics
+- `ourdailygizz`: setup a schedule for daily lyrics using a cron format, the default timezone is UTC.
+  - What is cron? https://crontab.guru/#5_4_*_*_sun
 
 ## Breakdown
 
