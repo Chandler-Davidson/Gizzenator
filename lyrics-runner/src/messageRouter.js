@@ -7,7 +7,7 @@ const genius = new Genius(config.get("Genius"));
 async function fetchLyrics(artist, titles) {
   return (await Promise.allSettled(
     titles.map(t => genius.lyricSections(artist, t))
-  )).map(({ value }) => value);
+  )).map(({ value }) => value).filter(v => v);
 }
 
 export async function messageRouter(msg, logger) {
