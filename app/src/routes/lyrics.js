@@ -1,4 +1,4 @@
-import { firestore } from 'database';
+import { firestore, FieldPath} from 'database';
 
 const kglw = "King Gizzard & The Lizard Wizard";
 
@@ -7,7 +7,7 @@ export async function fetchSection(req, resp) {
 }
 
 export async function findRandomSection(artist = kglw) {
-  const { title, sections } = await findRandomSong(artist);
+  const { title, sections } = await findRandomSong();
   const sectionIndex = randomInteger(0, sections.length - 1);
 
   return {
@@ -17,24 +17,21 @@ export async function findRandomSection(artist = kglw) {
   };
 }
 
-function* buildRandomSongQuery(artist) {
-  const songRef = firestore.collection('songs');
+async function findRandomSong() {
+  let songRef = firestore.collection("songs");
+  const key = songRef.doc().id;
 
-  for (const value of [randomInteger(0, Number.MAX_SAFE_INTEGER).toString(), '']) {
-    yield songRef
-      .where('artist', '==', artist)
-      .where('__name__', '>=', value)
-      .orderBy('__name__').limit(1).get();
-  }
-}
-
-async function findRandomSong(artist) {
-  for (const query of buildRandomSongQuery(artist)) {
-    const snapshot = await query;
-    if (!snapshot.empty) {
-      return snapshot.docs.at(0).data();
+  for (const op of ['>=', '<']) {
+    const snapshot = await songRef
+    .where(FieldPath.documentId(), op, key)
+      .limit(1).get();
+    
+    if (snapshot.size > 0) {
+      return snapshot.docs[0].data();
     }
   }
+
+  throw 'Unable to find random document';
 }
 
 function randomInteger(min, max) {
